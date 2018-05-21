@@ -114,5 +114,17 @@ RUN chmod 777 -Rf /var/www /var/www/.* \
 	&& a2enmod rewrite \
 	&& a2enmod headers
 
+WORKDIR /tmp
+RUN curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar && \
+    cp /tmp/phpcs.phar /usr/local/bin/phpcs && \
+    chmod +x /usr/local/bin/phpcs
+
+RUN /usr/local/bin/phpcs --config-set show_progress 1 && \
+    /usr/local/bin/phpcs --config-set colors 1 && \
+    /usr/local/bin/phpcs --config-set report_width 140 && \
+    /usr/local/bin/phpcs --config-set encoding utf-8
+
+ENTRYPOINT ["/usr/local/bin/phpcs"]
+
 VOLUME /var/www/html
 WORKDIR /var/www/html
