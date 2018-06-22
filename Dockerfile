@@ -76,10 +76,10 @@ RUN composer global require hirak/prestissimo
 
 # Install Code Sniffer
 
-RUN git clone https://github.com/magento/marketplace-eqp.git ~/.composer/vendor/magento/marketplace-eqp
-RUN cd ~/.composer/vendor/magento/marketplace-eqp && composer install
-RUN chmod +x ~/.composer/vendor/magento/marketplace-eqp/vendor/bin/phpcs
-RUN ln -s ~/.composer/vendor/magento/marketplace-eqp/vendor/bin/phpcs /usr/local/bin;
+RUN git clone https://github.com/magento/marketplace-eqp.git /var/www/marketplace-eqp
+RUN cd /var/www/marketplace-eqp && composer install
+RUN chmod +x /var/www/marketplace-eqp/vendor/bin/phpcs
+RUN ln -s /var/www/marketplace-eqp/vendor/bin/phpcs /usr/local/bin;
 
 ENV PATH="/var/www/.composer/vendor/bin/:${PATH}"
 
